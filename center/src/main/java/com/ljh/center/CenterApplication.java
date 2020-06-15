@@ -7,6 +7,12 @@ import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.ComponentScan;
 
+/**
+ * center模块：负载eureka服务注册发现;Zuul网关路由、限流
+ *
+ * @author luojiahui
+ * @date 20200615 10:20:25
+ */
 @SpringBootApplication
 @EnableEurekaServer
 @EnableZuulProxy

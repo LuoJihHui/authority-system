@@ -24,3 +24,9 @@ eureka:
       defaultZone: http://localhost:8888/eureka/
   instance:
     hostname: localhost
+
+info:
+  app.name: ${spring.application.name}
+  company.name: ljh
+  build.artifactId: ${project.artifactId}
+  build.version: ${project.version}

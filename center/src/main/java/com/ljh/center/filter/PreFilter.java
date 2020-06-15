@@ -3,8 +3,7 @@ package com.ljh.center.filter;
 import cn.hutool.core.convert.Convert;
 import cn.hutool.core.util.StrUtil;
 import com.ljh.center.config.ConfigProperties;
-import com.ljh.center.util.AuthJwtHelper;
-import com.ljh.commons.constant.SystemConstant;
+import com.ljh.commons.util.AuthJwtHelper;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import com.netflix.zuul.exception.ZuulException;
@@ -56,7 +55,7 @@ public class PreFilter extends ZuulFilter {
         Stream.of(releaseUrlList).forEach(url -> {
             if (!path.contains(url)) {
                 // 校验token
-                String token = Convert.toStr(request.getHeader(SystemConstant.TOKEN_NAME));
+                String token = Convert.toStr(request.getHeader(properties.getTokenKey()));
                 // token为空或检验未通过
                 if (StrUtil.isBlank(token) || !AuthJwtHelper.getAuthJwtHelper().verifyJwtToken(token)) {
                     logger.warn("Authorization token expired or incorrect");

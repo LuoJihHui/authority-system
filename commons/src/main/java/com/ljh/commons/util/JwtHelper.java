@@ -1,4 +1,4 @@
-package com.ljh.center.util;
+package com.ljh.commons.util;
 
 import cn.hutool.core.date.DateUtil;
 import com.auth0.jwt.JWT;

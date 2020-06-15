@@ -49,13 +49,11 @@
         </dependency>
         <!-- 导入工具模块 end -->
 
-        <!-- JWT start-->
+        <!-- actuator监控信息完善 -->
         <dependency>
-            <groupId>com.auth0</groupId>
-            <artifactId>java-jwt</artifactId>
-            <version>3.5.0</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
-        <!-- JWT end-->
     </dependencies>
 
     <build>

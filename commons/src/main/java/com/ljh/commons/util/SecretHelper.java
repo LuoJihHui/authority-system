@@ -1,4 +1,4 @@
-package com.ljh.center.util;
+package com.ljh.commons.util;
 
 import com.auth0.jwt.algorithms.Algorithm;
 import org.slf4j.Logger;

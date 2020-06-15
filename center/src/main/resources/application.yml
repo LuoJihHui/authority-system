@@ -5,4 +5,42 @@ spring:
     name: center-server
 
 center:
-  releaseAddress: /token
+  releaseAddress: /login,/rsa/key
+  jwt:
+    key: Access-Token
+
+eureka:
+  dashboard:
+    enabled: true
+  instance:
+    hostname: localhost
+    #心跳时间间隔
+    lease-renewal-interval-in-seconds: 5
+    prefer-ip-address: true
+  server:
+    # 读超时时间
+    peer-node-read-timeout-ms: 80000
+    enable-self-preservation: false
+    #剔除失效服务间隔
+    eviction-interval-timer-in-ms: 2000
+  client:
+    # 是否注册自己为服务
+    register-with-eureka: true
+    # 是否去检索服务
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:${server.port}/eureka
+
+
+zuul:
+  retryable: true
+  routes:
+    portal-server:
+      path: /authority/**
+      serviceId: AUTH-SERVER
+
+info:
+  app.name: ${spring.application.name}
+  company.name: ljh
+  build.artifactId: ${project.artifactId}
+  build.version: ${project.version}

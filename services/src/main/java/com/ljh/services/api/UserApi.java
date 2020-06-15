@@ -2,10 +2,7 @@ package com.ljh.services.api;
 
 import com.ljh.services.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
@@ -22,6 +19,18 @@ public class UserApi {
 
     @Autowired
     private UserService userService;
+
+    /**
+     * 用户登录并签发token
+     *
+     * @param name
+     * @param pwd
+     * @return
+     */
+    @GetMapping("/login")
+    public Map<String, Object> login(@RequestParam("username") String name, @RequestParam("password") String pwd) {
+        return userService.login(name, pwd);
+    }
 
     /**
      * 创建新用户

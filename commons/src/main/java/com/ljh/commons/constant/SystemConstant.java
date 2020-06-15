@@ -13,11 +13,7 @@ public class SystemConstant {
     }
 
     // ----------------------token相关----------------------
-    /**
-     * 统一token名称
-     */
-    public static final String TOKEN_NAME = "Access-Token";
 
-    public static final String JWT_USER_ID = "USERID";
+    public static final String JWT_USER_ID = "id";
     // ----------------------token相关----------------------
 }
