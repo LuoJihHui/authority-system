@@ -1,14 +1,15 @@
 package com.ljh.services.service.impl;
 
+import cn.hutool.core.bean.BeanException;
+import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.collection.CollUtil;
-import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
-import com.ljh.commons.exception.NonAccessTokenException;
-import com.ljh.commons.util.AuthJwtHelper;
 import com.ljh.commons.util.RsaUtils;
 import com.ljh.services.entity.AsKeyT;
+import com.ljh.services.entity.AsUserT;
 import com.ljh.services.mapper.AsKeyMapper;
+import com.ljh.services.mapper.AsUserMapper;
 import com.ljh.services.service.EncryptionService;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
@@ -29,20 +30,23 @@ public class EncryptionServiceImpl implements EncryptionService {
 
     @Resource
     private AsKeyMapper asKeyMapper;
+    @Resource
+    private AsUserMapper userMapper;
 
     /**
      * 获取前后端加密公钥
      * 1.获取rsa秘钥对,存储在后端
      * 2.返回公钥
      *
-     * @param token
+     * @param userId
      * @return
      */
     @Override
-    public Map<String, String> getRsaPublicKey(String token) {
-        String userId = AuthJwtHelper.getAuthJwtHelper().getUserIdFromJwtToken(token);
-        if (StrUtil.isBlank(userId)) {
-            throw new NonAccessTokenException("未获取到用户id,请检查当前用户是否有效登录!");
+    public Map<String, String> getRsaPublicKey(String userId) {
+        // 检查是否存在该用户
+        AsUserT user = userMapper.selectById(userId);
+        if (BeanUtil.isEmpty(user)) {
+            throw new BeanException("未查询到当前用户信息,请核实或联系管理员!");
         }
         try {
             Map<String, Object> map = RsaUtils.genKeyPair();
