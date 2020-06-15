@@ -1,0 +1,26 @@
+server:
+  port: 8889
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/authoritysystem?useUnicode=true&characterEncoding=utf-8&useSSL=false
+    username: root
+    password: root
+
+  redis:
+    host: localhost
+    password:
+    database: 0
+    port: 6379
+
+  application:
+    name: auth-server
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8888/eureka/
+  instance:
+    hostname: localhost
