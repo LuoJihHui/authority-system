@@ -17,7 +17,7 @@ import org.springframework.context.annotation.ComponentScan;
 @EnableEurekaServer
 @EnableZuulProxy
 @EnableFeignClients
-@ComponentScan("com.ljh.*")
+@ComponentScan(basePackages = "com.ljh.*")
 public class CenterApplication {
 
     public static void main(String[] args) {

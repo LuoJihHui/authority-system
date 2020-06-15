@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.stream.Stream;
 
 /**
  * 前置拦截器
@@ -52,18 +51,23 @@ public class PreFilter extends ZuulFilter {
         String path = request.getRequestURL().toString();
         // 放行地址列表
         String[] releaseUrlList = properties.getReleaseUrlList();
-        Stream.of(releaseUrlList).forEach(url -> {
-            if (!path.contains(url)) {
-                // 校验token
-                String token = Convert.toStr(request.getHeader(properties.getTokenKey()));
-                // token为空或检验未通过
-                if (StrUtil.isBlank(token) || !AuthJwtHelper.getAuthJwtHelper().verifyJwtToken(token)) {
-                    logger.warn("Authorization token expired or incorrect");
-                    outInfo(context);
-                }
-                logger.info("Authorization token is ok");
+        boolean release = false;
+        for (String url : releaseUrlList) {
+            if (path.contains(url)) {
+                release = true;
+                break;
             }
-        });
+        }
+        if (!release) {
+            // 校验token
+            String token = Convert.toStr(request.getHeader(properties.getTokenKey()));
+            // token为空或检验未通过
+            if (StrUtil.isBlank(token) || !AuthJwtHelper.getAuthJwtHelper().verifyJwtToken(token)) {
+                logger.warn("Authorization token expired or incorrect");
+                outInfo(context);
+            }
+            logger.info("Authorization token is ok");
+        }
         return null;
     }
 
