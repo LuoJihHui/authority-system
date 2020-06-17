@@ -12,11 +12,10 @@ public interface UserService {
     /**
      * 用户登录并签发token
      *
-     * @param name
-     * @param pwd
+     * @param param
      * @return
      */
-    Map<String, Object> login(String name, String pwd);
+    Map<String, Object> login(Map<String, Object> param);
 
     /**
      * 创建新用户

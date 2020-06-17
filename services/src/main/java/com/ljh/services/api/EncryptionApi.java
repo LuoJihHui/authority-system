@@ -23,11 +23,11 @@ public class EncryptionApi {
     /**
      * 获取前后端加密公钥
      *
-     * @param userId
+     * @param username 用户名
      * @return
      */
     @GetMapping("/rsa/key")
-    public Map<String, String> getRsaPublicKey(@RequestParam("user_id") String userId) {
-        return encryptionService.getRsaPublicKey(userId);
+    public Map<String, String> getRsaPublicKey(@RequestParam("user_name") String username) {
+        return encryptionService.getRsaPublicKey(username);
     }
 }

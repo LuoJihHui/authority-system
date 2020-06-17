@@ -4,6 +4,7 @@ import com.ljh.commons.constant.ResponseBean;
 import com.ljh.commons.constant.ResponseCode;
 import com.ljh.commons.exception.BaseException;
 import com.ljh.commons.exception.NonAccessTokenException;
+import com.ljh.commons.exception.PasswordErrorException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -43,6 +44,20 @@ public class GlobalExceptionHandlers {
         exception.printStackTrace();
         ResponseBean responseBean = new ResponseBean();
         responseBean.setResponseCode(ResponseCode.UNAUTHORIZED);
+        responseBean.setData(exception.getMessage());
+        return responseBean;
+    }
+
+    /**
+     * 处理基础异常
+     *
+     * @param exception 抛出的异常类型
+     */
+    @ExceptionHandler(PasswordErrorException.class)
+    public ResponseBean handleValidationBodyException(PasswordErrorException exception) {
+        exception.printStackTrace();
+        ResponseBean responseBean = new ResponseBean();
+        responseBean.setResponseCode(ResponseCode.ERROR);
         responseBean.setData(exception.getMessage());
         return responseBean;
     }

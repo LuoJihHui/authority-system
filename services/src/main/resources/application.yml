@@ -30,3 +30,10 @@ info:
   company.name: ljh
   build.artifactId: ${project.artifactId}
   build.version: ${project.version}
+
+mybatis-plus:
+  type-aliases-package: com.ljh.services.entity
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    call-setters-on-nulls: true
+  mapper-locations: classpath:mapper/*.xml

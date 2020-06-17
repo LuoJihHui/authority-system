@@ -12,8 +12,8 @@ public interface EncryptionService {
     /**
      * 获取前后端加密公钥
      *
-     * @param userId
+     * @param username 用户名
      * @return
      */
-    Map<String, String> getRsaPublicKey(String userId);
+    Map<String, String> getRsaPublicKey(String username);
 }

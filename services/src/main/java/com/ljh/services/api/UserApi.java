@@ -23,13 +23,12 @@ public class UserApi {
     /**
      * 用户登录并签发token
      *
-     * @param name
-     * @param pwd
+     * @param param
      * @return
      */
-    @GetMapping("/login")
-    public Map<String, Object> login(@RequestParam("username") String name, @RequestParam("password") String pwd) {
-        return userService.login(name, pwd);
+    @PostMapping("/login")
+    public Map<String, Object> login(@RequestBody Map<String, Object> param) {
+        return userService.login(param);
     }
 
     /**

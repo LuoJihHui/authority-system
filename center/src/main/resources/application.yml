@@ -22,7 +22,7 @@ eureka:
     peer-node-read-timeout-ms: 80000
     enable-self-preservation: false
     #剔除失效服务间隔
-    eviction-interval-timer-in-ms: 2000
+    eviction-interval-timer-in-ms: 500
   client:
     # 是否注册自己为服务
     register-with-eureka: true

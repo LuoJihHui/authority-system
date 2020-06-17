@@ -1,7 +1,6 @@
 package com.ljh.services.service.impl;
 
 import cn.hutool.core.bean.BeanException;
-import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.collection.CollUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
@@ -38,21 +37,23 @@ public class EncryptionServiceImpl implements EncryptionService {
      * 1.获取rsa秘钥对,存储在后端
      * 2.返回公钥
      *
-     * @param userId
+     * @param username 用户名
      * @return
      */
     @Override
-    public Map<String, String> getRsaPublicKey(String userId) {
+    public Map<String, String> getRsaPublicKey(String username) {
         // 检查是否存在该用户
-        AsUserT user = userMapper.selectById(userId);
-        if (BeanUtil.isEmpty(user)) {
+        QueryWrapper<AsUserT> wrapper = new QueryWrapper<>();
+        wrapper.eq("user_name", username).eq("disable", 0);
+        List<AsUserT> userList = userMapper.selectList(wrapper);
+        if (CollUtil.isEmpty(userList)) {
             throw new BeanException("未查询到当前用户信息,请核实或联系管理员!");
         }
         try {
             Map<String, Object> map = RsaUtils.genKeyPair();
             String publicKey = RsaUtils.getPublicKey(map);
             String privateKey = RsaUtils.getPrivateKey(map);
-            insertKey(publicKey, privateKey, userId);
+            insertKey(publicKey, privateKey, username);
             return new HashMap<String, String>(1) {{
                 put("publicKey", publicKey);
             }};

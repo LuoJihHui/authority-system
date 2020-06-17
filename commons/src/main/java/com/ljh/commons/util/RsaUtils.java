@@ -335,10 +335,8 @@ public class RsaUtils {
 //        String privateKey = getPrivateKey(stringObjectMap);
 //        System.out.println("私钥" + privateKey);
 //        System.out.println("公钥:" + publicKey1);
-        String publicKey = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDBF80aNnQ142klisfRGxMJpV0++1" +
-                "+isLkLfVyzYpFDtNgXOcS4lL1BT7kWPsHpUBi91ZMewDgZhITzDOWlAS9RgSC6ySxGlYD5/xCjCv0qqfG68altPJuMx" +
-                "/IHglqBS0vqriHsMcJEdwwoBY/D8CL3A1Zsl6RfqsAFrTBpCDHmCQIDAQAB";
-        String s = encryptedData("12345678", publicKey);
+        String publicKey = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCRxaiTttDMfpWtapsfpXpyFaBLuBrCMUoy0j8C7Ij++yIAbhF065CyQlB7kJBMPDgsbOKiFME6pCPt1pufnYAkUGjHYuxkh5GgCy0lCKVqCu9PA91TTC+ynPz9VzaWhMRMwlaNEjCVx+zz82Pxtf9/X/lO+Xj0lX9QRzG7TekOtwIDAQAB";
+        String s = encryptedData("123456", publicKey);
         System.out.println(s);
 //        Map<String, Object> stringObjectMap = genKeyPair();
 //        System.out.println(getPrivateKey(stringObjectMap));
